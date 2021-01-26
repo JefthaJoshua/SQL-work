@@ -1,0 +1,105 @@
+CREATE TABLE dog (
+"ID" INT,
+"NAME" VARCHAR(255) NOT NULL,
+"DESCR" CLOB NOT NULL,
+"SIZE" VARCHAR(6) NOT NULL CHECK("SIZE" IN ('SMALL','MEDIUM','LARGE')),
+"DATE" TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+CONSTRAINT PK_TBLDOG PRIMARY KEY("ID")
+);
+
+INSERT ALL 
+INTO dog VALUES(1,'Max','Its distinctive appearance and deep foghorn voice make it stand out in a crowd','MEDIUM', CURRENT_DATE)
+INTO dog VALUES(2,'Jake','It loves human companionship and being part of the group','MEDIUM', CURRENT_DATE)
+INTO dog VALUES(3,'Buster','Short-legged but surprisingly strong and agile','SMALL', CURRENT_DATE)
+SELECT 1 FROM DUAL;
+
+CREATE TABLE BREEDER (
+"ID" INT, 
+"NAME" VARCHAR(255) NOT NULL,
+ADDRESS CLOB NOT NULL,
+"STATE" VARCHAR(10) NOT NULL,
+CITY VARCHAR(40) NOT NULL,
+PHONE VARCHAR(28) NOT NULL,
+EMAIL VARCHAR(28) NOT NULL,
+"DATE" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+CONSTRAINT PK_TBLBREEDER PRIMARY KEY("ID")
+);
+
+INSERT ALL
+INTO BREEDER VALUES (1,'Joe Bloggs','23 Smith St','NSW','Sydney','02 7875 4545','joe@email.com', CURRENT_DATE)
+INTO BREEDER VALUES (2,'Tom Smith','11 Tucker St','QLD','Brisbane','07 023 2343','tom@email.com', CURRENT_DATE)
+SELECT 1 FROM DUAL;
+
+CREATE TABLE rfid_dog (
+DOG_ID INT,
+BAR_CODE VARCHAR(128) NOT NULL,
+NOTES CLOB,
+ISO_COMPLIANT CHAR(1) DEFAULT 'n',
+"DATE" TIMESTAMP,
+CONSTRAINT PK_TBLRFID_DOG PRIMARY KEY(DOG_ID),
+CONSTRAINT FK_TBLRFID_DOG FOREIGN KEY(DOG_ID) REFERENCES dog("ID")
+);
+
+INSERT ALL
+INTO rfid_dog VALUES(1,'234k34340ll2342323022','This is a RFID tag for the Max','y',CURRENT_DATE)
+INTO rfid_dog VALUES(2,'09383638920290397d829','This is a RFID tag for the Jake','y',CURRENT_DATE)
+INTO rfid_dog VALUES(3,'30id8383837210jndal20','This is a RFID tag for the Buster','y',CURRENT_DATE)
+SELECT 1 FROM DUAL;
+
+CREATE TABLE BREED (
+"ID" INT, 
+"NAME" VARCHAR(255) NOT NULL,
+"DESCR" CLOB NOT NULL,
+"DATE" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+CONSTRAINT PK_TBLBREED PRIMARY KEY("ID")
+);
+
+INSERT ALL
+INTO BREED VALUES(1,'Hounds','One of the oldest groups of dog originating thousands of years ago',CURRENT_DATE)
+INTO BREED VALUES(2,'Terrier','A tough, no-nonsense, rabbiting and badgering dog',CURRENT_DATE)
+SELECT 1 FROM DUAL;
+
+CREATE TABLE BREED_BREEDER (
+BREED_ID INT,
+BREEDER_ID INT,
+CONSTRAINT PK_TBLBREED_BREEDER PRIMARY KEY(BREED_ID,BREEDER_ID),
+CONSTRAINT FK_TBLBREED_BREEDER1 FOREIGN KEY(BREED_ID) REFERENCES BREED("ID"),
+CONSTRAINT FK_TBLBREED_BREEDER2 FOREIGN KEY(BREEDER_ID) REFERENCES BREEDER("ID")
+);
+
+INSERT ALL
+INTO BREED_BREEDER VALUES(1,1)
+INTO BREED_BREEDER VALUES(2,1)
+INTO BREED_BREEDER VALUES(1,2)
+SELECT 1 FROM DUAL;
+
+--1
+ALTER TABLE dog
+ADD breed_id int(11) AFTER date;
+
+--2
+UPDATE dog SET breed_id = '1' WHERE id = '1';
+UPDATE dog SET breed_id = '1' WHERE id = '2';
+UPDATE dog SET breed_id = '2' WHERE id = '3';
+
+--3
+SELECT dog.id, dog.name, rfid_dog.bar_code AS rfid
+FROM dog,rfid_dog
+WHERE dog.id = rfid_dog.dog_id
+ORDER BY dog.name ASC;
+
+--4
+SELECT dog.id,dog.name,breed.name AS breed
+FROM dog,breed
+WHERE dog.breed_id = breed.id
+ORDER BY dog.name ASC;
+
+--5
+SELECT breeder.name,breeder.address,breeder.phone,breeder.email,breed.name AS breedName
+FROM breed,breeder,breed__breeder
+WHERE breed__breeder.breed_id = breed.id
+AND breed__breeder.breeder_id = breeder.id
+ORDER BY breeder.name ASC;
+
+
+
