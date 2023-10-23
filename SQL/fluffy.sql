@@ -75,11 +75,11 @@ INTO TBL_EMPLOYEE VALUES ('emp105','Jaci','Samson','0877277521','Sales','10 Main
 SELECT 1 FROM DUAL;
 
 INSERT ALL
-INTO TBL_DELIVERY VALUES ('511','Delivery contains glass items –fragile','10 May 2017','15 May 2017')
+INTO TBL_DELIVERY VALUES ('511','Delivery contains glass items â€“fragile','10 May 2017','15 May 2017')
 INTO TBL_DELIVERY VALUES ('512','Delivery of wooden items','12 May 2017','15 May 2017')
 INTO TBL_DELIVERY VALUES ('513','No description available ','12 May 2017','17 May 2017')
-INTO TBL_DELIVERY VALUES ('514','Delivery contains glass items –fragile','12 May 2017','15 May 2017')
-INTO TBL_DELIVERY VALUES ('515','Delivery contains glass items –fragile','18 May 2017','19 May 2017')
+INTO TBL_DELIVERY VALUES ('514','Delivery contains glass items â€“fragile','12 May 2017','15 May 2017')
+INTO TBL_DELIVERY VALUES ('515','Delivery contains glass items â€“fragile','18 May 2017','19 May 2017')
 INTO TBL_DELIVERY VALUES ('516','No description available','20 May 2017','25 May 2017')
 INTO TBL_DELIVERY VALUES ('517','Delivery of wooden items','25 May 2017','27 May 2017')
 SELECT 1 FROM DUAL;
@@ -122,3 +122,5 @@ INTO TBL_PRODUCT_BILLING VALUES ('511','null','7112','8118')
 INTO TBL_PRODUCT_BILLING VALUES ('513','null','7111','8117')
 INTO TBL_PRODUCT_BILLING VALUES ('512','null','7115','8116')
 SELECT 1 FROM DUAL;
+
++
