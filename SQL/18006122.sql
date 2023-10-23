@@ -128,11 +128,11 @@ INTO EMPLOYEE_TBL VALUES ('emp105', 'Jaci', 'Samson', '0827122255', 'Manager', '
 SELECT 1 FROM DUAL;
 
 INSERT ALL
-INTO DELIVERY_TBL VALUES (511, 'Delivery contains glass items – fragile', '10 May 2017', '15 May 2017')
+INTO DELIVERY_TBL VALUES (511, 'Delivery contains glass items â€“ fragile', '10 May 2017', '15 May 2017')
 INTO DELIVERY_TBL VALUES (512 , 'Delivery of wooden items', '12 May 2017', '15 May 2017 ')
 INTO DELIVERY_TBL VALUES (513 , 'No description available', '12 May 2017', '17 May 2017 ')
-INTO DELIVERY_TBL VALUES (514 , 'Delivery contains glass items – fragile', '12 May 2017', '15 May 2017')
-INTO DELIVERY_TBL VALUES (515 , 'Delivery contains glass items – fragile', '18 May 2017 ', '19 May 2017 ')
+INTO DELIVERY_TBL VALUES (514 , 'Delivery contains glass items â€“ fragile', '12 May 2017', '15 May 2017')
+INTO DELIVERY_TBL VALUES (515 , 'Delivery contains glass items â€“ fragile', '18 May 2017 ', '19 May 2017 ')
 INTO DELIVERY_TBL VALUES (516 , 'No description available', '20 May 2017', '25 May 2017')
 INTO DELIVERY_TBL VALUES (517 , 'Delivery of wooden items', '25 May 2017', '27 May 2017')
 SELECT 1 FROM DUAL;
@@ -182,7 +182,7 @@ FROM CUSTOMER_TBL Z,BILLING_TBL T, EMPLOYEE_TBL A,PRODUCT_BILLING_TBL S, PRODUCT
 WHERE(Z.CUSTOMER_ID = T.CUSTOMER_ID AND A.EMPLOYEE_ID = T.EMPLOYEE_ID AND S.BILL_ID = T.BILL_ID and S.PRODUCT_ID = F.PRODUCT_ID and E.DELIVERY_ID = S.DELIVERY_ID 
 AND BILL_DATE = '15-MAY-17');
 
---QUESTION 5
+--QUESTION5
 CREATE VIEW PRODUCT AS
 SELECT PRODUCT, PRICE, QTY ,"Stock Value" from(
 SELECT PD.PRODUCT, PD.PRICE, PD.QTY , sum(PD.PRICE*PD.QTY) as "Stock Value"
